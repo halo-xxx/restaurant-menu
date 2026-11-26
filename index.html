@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#18251f">
+<title>Our Restaurant | Digital Menu</title>
+<style>
+:root{--ink:#18251f;--muted:#68736d;--cream:#f7f5ef;--card:#fff;--gold:#c59b58;--line:#e9e5dc;--green:#244b3b}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(135deg,#18251f,#345744);color:#fff;padding:28px 20px 26px;border-radius:0 0 26px 26px}
+.top{max-width:980px;margin:auto}.eyebrow{color:#e5c58f;text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700}
+h1{font-family:Georgia,serif;font-size:34px;font-weight:500;margin:9px 0 5px}.sub{color:#e2e9e3;font-size:14px;margin:0}
+.header-row{display:flex;justify-content:space-between;align-items:center;gap:12px}.pill{border:1px solid #ffffff55;border-radius:99px;padding:8px 12px;font-size:12px;color:#f5e8d3;white-space:nowrap}
+main{max-width:980px;margin:auto;padding:20px 16px 110px}.intro{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 18px}.intro h2{font:500 23px Georgia,serif;margin:0}.intro p{font-size:12px;color:var(--muted);margin:5px 0 0}
+.search{width:100%;border:1px solid var(--line);background:white;border-radius:13px;padding:13px 15px;font-size:14px;outline:none;margin-bottom:14px}
+.categories{display:flex;gap:8px;overflow:auto;padding:2px 0 14px;scrollbar-width:none}.categories button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:9px 14px;white-space:nowrap;color:#46534b;font-size:12px}.categories button.active{background:var(--ink);color:white;border-color:var(--ink)}
+.section-title{font:500 21px Georgia,serif;margin:14px 0 12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:17px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.food-art{height:112px;display:flex;align-items:center;justify-content:center;font-size:43px;background:linear-gradient(135deg,#eee5d5,#d8c7a8)}
+.item-body{padding:12px;display:flex;flex-direction:column;flex:1}.item h3{font-size:14px;margin:0 0 5px}.desc{font-size:11px;line-height:1.45;color:var(--muted);min-height:31px;margin:0 0 10px}.item-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto}.price{font-weight:750;font-size:13px}.add{border:0;background:var(--green);color:white;border-radius:9px;padding:8px 11px;font-size:11px;font-weight:700}
+.notice{background:#f0eadf;border:1px solid #e6dccb;border-radius:13px;padding:12px;font-size:11px;color:#655c4c;line-height:1.5;margin:18px 0}
+.cartbar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:12px 16px;z-index:5}.cartinner{max-width:980px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}.cartinfo strong{display:block;font-size:14px}.cartinfo span{font-size:11px;color:var(--muted)}.checkout{background:var(--gold);border:0;color:#1e211d;font-weight:800;border-radius:12px;padding:13px 17px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:10;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:620px;max-height:88vh;overflow:auto;border-radius:22px 22px 0 0;padding:20px}.sheethead{display:flex;justify-content:space-between;align-items:center}.sheet h2{font:500 24px Georgia,serif;margin:0}.close{border:0;background:#eee;border-radius:50%;width:34px;height:34px;font-size:18px}
+.cartline{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:12px 0;gap:10px}.cartline small{display:block;color:var(--muted);margin-top:3px}.qty{display:flex;align-items:center;gap:9px}.qty button{border:1px solid var(--line);background:white;border-radius:8px;width:28px;height:28px}
+.total{display:flex;justify-content:space-between;font-weight:800;font-size:17px;padding:16px 0}
+label{display:block;font-size:12px;font-weight:700;margin:12px 0 6px}input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit;font-size:14px}textarea{min-height:65px;resize:vertical}.send{width:100%;background:#218c55;color:white;border:0;border-radius:12px;padding:15px;font-weight:800;font-size:14px;margin:15px 0 5px}
+footer{text-align:center;color:#879088;font-size:10px;padding:15px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.food-art{height:140px}.modal{align-items:center}.sheet{border-radius:22px}}
+</style>
+</head>
+<body>
+<header><div class="top">
+<div class="header-row"><div><div class="eyebrow">A warm welcome awaits</div><h1>Our Restaurant</h1><p class="sub">Good food. Great moments.</p></div><div class="pill">DIGITAL MENU</div></div>
+</div></header>
+<main>
+<div class="intro"><div><h2>Explore our menu</h2><p>Choose your favourites and send your order to our team.</p></div></div>
+<input class="search" id="search" placeholder="Search dishes..." aria-label="Search dishes">
+<nav class="categories" id="categories"></nav>
+<div id="menu"></div>
+<div class="notice"><strong>Menu preview:</strong> This starter catalogue is inspired by The Vue, Abuja's published menu. Items and reference prices are for demonstration only; confirm availability and replace prices before going live. Your restaurant is not affiliated with The Vue.</div>
+<footer>Thank you for dining with us · Prices shown in Nigerian naira</footer>
+</main>
+<div class="cartbar"><div class="cartinner"><div class="cartinfo"><strong id="cart-count">Your basket is empty</strong><span id="cart-total">Add a dish to get started</span></div><button class="checkout" onclick="openCart()">VIEW BASKET →</button></div></div>
+<div class="modal" id="modal" onclick="if(event.target===this)closeCart()"><div class="sheet">
+<div class="sheethead"><h2>Your order</h2><button class="close" onclick="closeCart()">×</button></div>
+<div id="cart-lines"></div><div class="total"><span>Total</span><span id="modal-total">₦0</span></div>
+<label for="customer">Your name</label><input id="customer" placeholder="e.g. Ada">
+<label for="table">Table number</label><input id="table" placeholder="e.g. 04">
+<label for="notes">Special instructions (optional)</label><textarea id="notes" placeholder="Allergies, preferences, or other requests"></textarea>
+<button class="send" onclick="sendOrder()">SEND ORDER ON WHATSAPP</button>
+<p style="font-size:11px;color:#68736d;line-height:1.5">Your order will be sent to the restaurant's WhatsApp business number. Please review the message and press Send in WhatsApp to complete your order.</p>
+</div></div>
+<script>
+const WHATSAPP = "2349061657787"; // Business number: 09061657787
+const items = [
+{cat:"Soups",name:"Sweet Corn Soup",desc:"Creamy, comforting soup with sweet corn.",price:9000,emoji:"🥣"},
+{cat:"Soups",name:"Tom Yum Soup",desc:"Thai-inspired hot and sour soup.",price:9000,emoji:"🍲"},
+{cat:"Soups",name:"Tom Kha Soup",desc:"Rich coconut soup with fragrant herbs.",price:9000,emoji:"🥥"},
+{cat:"Salads",name:"Som Tam (Thai Papaya Salad)",desc:"Fresh shredded green papaya with a lively dressing.",price:12000,emoji:"🥗"},
+{cat:"Starters",name:"Vegetable Spring Rolls",desc:"Crisp golden rolls with vegetable filling.",price:9000,emoji:"🥟"},
+{cat:"Starters",name:"Vegetable Samosas",desc:"Crispy pastry parcels with spiced potato.",price:9000,emoji:"🔺"},
+{cat:"Starters",name:"Chicken Satay",desc:"Grilled marinated chicken skewers.",price:18000,emoji:"🍢"},
+{cat:"Starters",name:"Kung Pao Chicken",desc:"Chicken tossed with chilli, ginger and savoury sauce.",price:18000,emoji:"🍗"},
+{cat:"Starters",name:"Chilli Chicken",desc:"Crispy chicken tossed in a spicy chilli sauce.",price:18000,emoji:"🌶️"},
+{cat:"Seafood",name:"Garlic Prawns",desc:"Prawns tossed with garlic and chilli.",price:28000,emoji:"🍤"},
+{cat:"Seafood",name:"Chilli Fish",desc:"Crispy fish pieces tossed in chilli sauce.",price:21000,emoji:"🐟"},
+{cat:"Grills & Tandoori",name:"Chicken Tikka",desc:"Yoghurt-marinated chicken roasted with spices.",price:17000,emoji:"🍗"},
+{cat:"Grills & Tandoori",name:"Tandoori Chicken Wings",desc:"Spiced roasted chicken wings.",price:17000,emoji:"🍖"},
+{cat:"Mains",name:"Butter Chicken",desc:"Chicken simmered in a creamy tomato and butter sauce.",price:19000,emoji:"🍛"},
+{cat:"Mains",name:"Chicken Tikka Masala",desc:"Grilled chicken in a rich spiced tomato gravy.",price:19000,emoji:"🍲"},
+{cat:"Rice & Noodles",name:"Fried Rice — Vegetable",desc:"Wok-style fried rice with vegetables.",price:12000,emoji:"🍚"},
+{cat:"Rice & Noodles",name:"Fried Rice — Chicken",desc:"Wok-style fried rice with chicken.",price:14000,emoji:"🍚"},
+{cat:"Rice & Noodles",name:"Hakka Noodles — Chicken",desc:"Cantonese-style noodles with chicken.",price:14000,emoji:"🍜"},
+{cat:"Rice & Noodles",name:"Chicken Biryani",desc:"Aromatic spiced rice served with yoghurt raita.",price:18000,emoji:"🥘"},
+{cat:"Rice & Noodles",name:"Steamed Basmati Rice",desc:"Light, fragrant steamed rice.",price:9000,emoji:"🍚"},
+{cat:"Desserts",name:"Brownie with Ice Cream",desc:"Warm chocolate brownie with creamy ice cream.",price:9000,emoji:"🍫"},
+{cat:"Desserts",name:"Fruit Salad with Ice Cream",desc:"Fresh fruit topped with vanilla ice cream.",price:9000,emoji:"🍨"}
+];
+const cart={};let active="All";
+const money=n=>"₦"+n.toLocaleString("en-NG");
+function renderCats(){let cats=["All",...new Set(items.map(x=>x.cat))];document.getElementById("categories").innerHTML=cats.map(c=>`<button class="${active===c?'active':''}" onclick="setCat('${c.replace(/'/g,"\\'")}')">${c}</button>`).join("")}
+function setCat(c){active=c;renderCats();renderMenu()}
+function renderMenu(){let q=document.getElementById("search").value.toLowerCase();let shown=items.filter(x=>(active==="All"||x.cat===active)&&(x.name+" "+x.desc).toLowerCase().includes(q));let groups={};shown.forEach(x=>(groups[x.cat]??=[]).push(x));document.getElementById("menu").innerHTML=Object.entries(groups).map(([cat,list])=>`<section><h2 class="section-title">${cat}</h2><div class="grid">${list.map(x=>`<article class="item"><div class="food-art">${x.emoji}</div><div class="item-body"><h3>${x.name}</h3><p class="desc">${x.desc}</p><div class="item-bottom"><span class="price">${money(x.price)}</span><button class="add" onclick="addItem('${x.name.replace(/'/g,"\\'")}')">＋ ADD</button></div></div></article>`).join("")}</div></section>`).join("")||"<p>No dishes match your search.</p>"}
+function addItem(name){cart[name]=(cart[name]||0)+1;updateCart()}
+function change(name,d){cart[name]=(cart[name]||0)+d;if(cart[name]<=0)delete cart[name];updateCart();openCart()}
+function total(){return items.reduce((s,x)=>s+x.price*(cart[x.name]||0),0)}
+function count(){return Object.values(cart).reduce((a,b)=>a+b,0)}
+function updateCart(){let n=count(),t=total();document.getElementById("cart-count").textContent=n?`${n} item${n===1?"":"s"} in your basket`:"Your basket is empty";document.getElementById("cart-total").textContent=n?money(t):"Add a dish to get started";document.getElementById("modal-total").textContent=money(t)}
+function openCart(){document.getElementById("modal").classList.add("show");renderCart()}
+function closeCart(){document.getElementById("modal").classList.remove("show")}
+function renderCart(){let rows=items.filter(x=>cart[x.name]);document.getElementById("cart-lines").innerHTML=rows.length?rows.map(x=>`<div class="cartline"><div><strong>${x.name}</strong><small>${money(x.price)} each</small></div><div class="qty"><button onclick="change('${x.name.replace(/'/g,"\\'")}',-1)">−</button><b>${cart[x.name]}</b><button onclick="change('${x.name.replace(/'/g,"\\'")}',1)">＋</button></div></div>`).join(""):"<p style='color:#68736d;font-size:13px;padding:15px 0'>Your basket is empty. Add something delicious from the menu.</p>";updateCart()}
+function sendOrder(){let rows=items.filter(x=>cart[x.name]);if(!rows.length){alert("Please add at least one item.");return}let customer=document.getElementById("customer").value.trim();let table=document.getElementById("table").value.trim();let notes=document.getElementById("notes").value.trim();if(!customer||!table){alert("Please enter your name and table number.");return}
+let msg=["*NEW RESTAURANT ORDER*","",`Name: ${customer}`,`Table: ${table}`,"","*ORDER DETAILS*",...rows.map(x=>`• ${x.name} × ${cart[x.name]} — ${money(x.price*cart[x.name])}`),"",`*TOTAL: ${money(total())}*`,notes?`Special instructions: ${notes}`:"","Please confirm this order."].filter(Boolean).join("\n");
+window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,"_blank")}
+document.getElementById("search").addEventListener("input",renderMenu);renderCats();renderMenu();updateCart();
+</script>
+</body></html>
